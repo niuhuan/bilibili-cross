@@ -1,0 +1,10 @@
+[package]
+name = "bilibili"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+main = { path = "../main" }
+
+[lib]
+crate-type = ["staticlib"]
