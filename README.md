@@ -1,16 +1,22 @@
-# bilibili
+bilibili
+==========
+bilibili桌面
 
-A new Flutter project.
+## 软件截图
 
-## Getting Started
+#### URL解析器 & 下载器
 
-This project is a starting point for a Flutter application.
+![](images/url_parser.png)
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## 技术实现
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+#### 架构
+
+展示层使用了Flutter, 渲染性能可以和原生GUI媲美, 逻辑和数据层使用了rust, 效率和C语言相近。
+
+Flutter调用FFI底层方法时会产生阻塞, 所以使用isolate负载均衡器, 使用隔离调用。
+
+Rust调用flutter, 要使用项目初始化时flutter暴露给底层的method指针, method会将event放入future队列, 避免渲染异常。
+
+![](images/technical_architecture.png)
