@@ -359,3 +359,146 @@ class Pages {
   }
 }
 
+
+class BVDownloadUrl {
+  BVDownloadUrl({
+    required this.from,
+    required this.result,
+    required this.message,
+    required this.quality,
+    required this.format,
+    required this.timelength,
+    required this.acceptFormat,
+    required this.acceptDescription,
+    required this.acceptQuality,
+    required this.videoCodecid,
+    required this.seekParam,
+    required this.seekType,
+    required this.durl,
+    required this.supportFormats,
+  });
+  late final String from;
+  late final String result;
+  late final String message;
+  late final int quality;
+  late final String format;
+  late final int timelength;
+  late final String acceptFormat;
+  late final List<String> acceptDescription;
+  late final List<int> acceptQuality;
+  late final int videoCodecid;
+  late final String seekParam;
+  late final String seekType;
+  late final List<Durl> durl;
+  late final List<SupportFormat> supportFormats;
+
+  BVDownloadUrl.fromJson(Map<String, dynamic> json){
+    from = json['from'];
+    result = json['result'];
+    message = json['message'];
+    quality = json['quality'];
+    format = json['format'];
+    timelength = json['timelength'];
+    acceptFormat = json['accept_format'];
+    acceptDescription = List.castFrom<dynamic, String>(json['accept_description']);
+    acceptQuality = List.castFrom<dynamic, int>(json['accept_quality']);
+    videoCodecid = json['video_codecid'];
+    seekParam = json['seek_param'];
+    seekType = json['seek_type'];
+    durl = List.from(json['durl']).map((e)=>Durl.fromJson(e)).toList();
+    supportFormats = List.from(json['support_formats']).map((e)=>SupportFormat.fromJson(e)).toList();
+  }
+
+  Map<String, dynamic> toJson() {
+    final _data = <String, dynamic>{};
+    _data['from'] = from;
+    _data['result'] = result;
+    _data['message'] = message;
+    _data['quality'] = quality;
+    _data['format'] = format;
+    _data['timelength'] = timelength;
+    _data['accept_format'] = acceptFormat;
+    _data['accept_description'] = acceptDescription;
+    _data['accept_quality'] = acceptQuality;
+    _data['video_codecid'] = videoCodecid;
+    _data['seek_param'] = seekParam;
+    _data['seek_type'] = seekType;
+    _data['durl'] = durl.map((e)=>e.toJson()).toList();
+    _data['support_formats'] = supportFormats.map((e)=>e.toJson()).toList();
+    return _data;
+  }
+}
+
+class Durl {
+  Durl({
+    required this.order,
+    required this.length,
+    required this.size,
+    required this.ahead,
+    required this.vhead,
+    required this.url,
+    required this.backupUrl,
+  });
+  late final int order;
+  late final int length;
+  late final int size;
+  late final String ahead;
+  late final String vhead;
+  late final String url;
+  late final List<String> backupUrl;
+
+  Durl.fromJson(Map<String, dynamic> json){
+    order = json['order'];
+    length = json['length'];
+    size = json['size'];
+    ahead = json['ahead'];
+    vhead = json['vhead'];
+    url = json['url'];
+    backupUrl = List.castFrom<dynamic, String>(json['backup_url']);
+  }
+
+  Map<String, dynamic> toJson() {
+    final _data = <String, dynamic>{};
+    _data['order'] = order;
+    _data['length'] = length;
+    _data['size'] = size;
+    _data['ahead'] = ahead;
+    _data['vhead'] = vhead;
+    _data['url'] = url;
+    _data['backup_url'] = backupUrl;
+    return _data;
+  }
+}
+
+class SupportFormat {
+  SupportFormat({
+    required this.quality,
+    required this.format,
+    required this.newDescription,
+    required this.displayDesc,
+    required this.superscript,
+  });
+  late final int quality;
+  late final String format;
+  late final String newDescription;
+  late final String displayDesc;
+  late final String superscript;
+
+  SupportFormat.fromJson(Map<String, dynamic> json){
+    quality = json['quality'];
+    format = json['format'];
+    newDescription = json['new_description'];
+    displayDesc = json['display_desc'];
+    superscript = json['superscript'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final _data = <String, dynamic>{};
+    _data['quality'] = quality;
+    _data['format'] = format;
+    _data['new_description'] = newDescription;
+    _data['display_desc'] = displayDesc;
+    _data['superscript'] = superscript;
+    return _data;
+  }
+}

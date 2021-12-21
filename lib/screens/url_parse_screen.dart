@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:bilibili/basic/entities.dart';
 import 'package:bilibili/ffi/ffi_methods.dart';
+import 'package:bilibili/ffi/video_quality.dart';
 import 'package:bilibili/screens/components/dialogs.dart';
 import 'package:flutter/material.dart';
 
@@ -64,16 +65,19 @@ class _UrlParseScreenState extends State<UrlParseScreen> {
     String? bvId = _bvIdRegex.stringMatch(text);
     if (bvId != null) {
       BvInfo? bvInfo;
+      BVDownloadUrl? bvDownloadUrl;
       Dialogs.showLoadingDialog(context);
       try {
         bvInfo = await ffi.bvInfo(bvId);
+        bvDownloadUrl = await ffi.bvDownloadUrl(
+          bvId,
+          bvInfo.cid,
+          VideoQuality.videoQuality720P,
+        );
       } catch (e, s) {
         print("$e\n$s");
       } finally {
         Dialogs.disposeLoadingDialog();
-      }
-      if (bvInfo != null) {
-        print(jsonEncode(bvInfo));
       }
     }
   }

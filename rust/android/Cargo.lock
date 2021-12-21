@@ -33,7 +33,8 @@ dependencies = [
 [[package]]
 name = "bilirust"
 version = "0.1.0"
-source = "git+https://github.com/niuhuan/bilirust.git?branch=master#7085f8b77a67e04a9bc9da934aff93b870422405"
+
+source = "git+https://github.com/niuhuan/bilirust.git?branch=master#3b22198441cd79992e39ff988d1d9afa60972cdc"
 dependencies = [
  "chrono",
  "regex",

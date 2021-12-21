@@ -66,6 +66,7 @@ async fn match_method(method: &str, params: String) -> Result<String> {
         }
         "my_info" => string_result(client().my_info().await?),
         "bv_info" => string_result(client().bv_info(params).await?),
+        "bv_download_url" => bv_download_url(params).await,
         _ => Err(Box::new(Error::from("NO FLAT"))),
     }
 }
@@ -85,4 +86,17 @@ async fn set_sess_data(sess_data: String) {
     let mut lock = CLIENT.lock().unwrap();
     lock.login_set_sess_data(sess_data);
     drop(lock);
+}
+
+async fn bv_download_url(params: String) -> Result<String> {
+    let download_url: BvDownloadUrlQuery = serde_json::from_str(params.as_str())?;
+    string_result(
+        client()
+            .bv_download_url(
+                download_url.bvid,
+                download_url.cid,
+                download_url.video_quality,
+            )
+            .await?,
+    )
 }
